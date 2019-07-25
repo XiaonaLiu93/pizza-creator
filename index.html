@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pizza Creator</title>
+    <link href="./index.css" rel="stylesheet">
+  </head>
+  <body>
+    <div>
+      <h1>Enter your details</h1>
+      <form class="details">
+        <div class="detail detail--error">
+          <label for="name">name</label>
+          <span>Please enter name</span>
+          <input type="text" name="name" id="name">
+        </div>
+        <div class="detail">
+          <label for="email">email</label>
+          <span>Please enter email</span>
+          <input type="text" name="email" id="email">
+        </div>
+        <div class="detail">
+          <label for="confirmEmail">confirm email</label>
+          <span>Please enter confirm email</span>
+          <input type="text" name="confirmEmail" id="confirmEmail">
+        </div>
+        <div class="detail">
+          <label for="address">address</label>
+          <span>Please enter address</span>
+          <input type="text" name="address" id="address">
+        </div>
+        <div class="detail">
+          <label for="postcode">postcode</label>
+          <span>Please enter postcode</span>
+          <input type="text" name="postcode" id="postcode">
+        </div>
+        <div class="detail">
+          <label for="contactNumber">contact number</label>
+          <span>Please enter contact number</span>
+          <input type="text" name="contactNumber" id="contactNumber">
+        </div>
+      </form>
+    </div>
+    <div>
+      <h1>Select your pizza</h1>
+      <div class="sizes">
+        <div class="size sizes__large size--active">
+          <img src="./assets/size/pizza.png" alt="large">
+          <span>large (13")</span>
+        </div>
+        <div class="size sizes__medium">
+          <img src="./assets/size/pizza.png" alt="medium">
+          <span>medium (11")</span>
+        </div>
+        <div class="size sizes__small">
+          <img src="./assets/size/pizza.png" alt="small">
+          <span>small (9")</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h1>Choose your toppings</h1>
+      <div class="toppings">
+        <div class="topping topping--active">
+          <img src="./assets/toppings/anchovy.svg">
+          <span>anchovy</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/bacon.svg">
+          <span>bacon</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/basil.svg">
+          <span>basil</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/chili.svg">
+          <span>chili</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/mozzarella.svg">
+          <span>mozzarella</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/mushroom.svg">
+          <span>mushroom</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/olive.svg">
+          <span>olive</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/onion.svg">
+          <span>onion</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/pepper.svg">
+          <span>pepper</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/pepperoni.svg">
+          <span>pepperoni</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/sweetcorn.svg">
+          <span>sweetcorn</span>
+        </div>
+        <div class="topping">
+          <img src="./assets/toppings/tomato.svg">
+          <span>tomato</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h1>Summary</h1>
+      <ul class="items">
+        <li class="item">
+          <span>large pizza</span>
+          <span>$13.99</span>
+        </li>
+        <li class="item">
+          <span>chili</span>
+          <span>$0.69</span>
+        </li>
+        <li class="item">
+          <span>tomato</span>
+          <span>$0.69</span>
+        </li>
+      </ul>
+      <hr>
+      <p class="total">Total: $10.68</p>
+      <button class="submit">Place order</button>
+    </div>
+  </body>
+</html>
