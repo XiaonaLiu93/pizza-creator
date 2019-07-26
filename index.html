@@ -4,40 +4,41 @@
     <meta charset="utf-8">
     <title>Pizza Creator</title>
     <link href="./index.css" rel="stylesheet">
+    <script src="./index.js"></script>
   </head>
   <body>
     <div>
       <h1>Enter your details</h1>
       <form class="details">
-        <div class="detail detail--error">
+        <div class="detail">
           <label for="name">name</label>
           <span>Please enter name</span>
-          <input type="text" name="name" id="name">
+          <input type="text" name="name" id="name" onfocusout="focusOutFromInput(this)" onfocusin="focusInToInput(this)">
         </div>
         <div class="detail">
           <label for="email">email</label>
           <span>Please enter email</span>
-          <input type="text" name="email" id="email">
+          <input type="text" name="email" id="email" onfocusout="focusOutFromInput(this)" onfocusin="focusInToInput(this)">
         </div>
         <div class="detail">
           <label for="confirmEmail">confirm email</label>
           <span>Please enter confirm email</span>
-          <input type="text" name="confirmEmail" id="confirmEmail">
+          <input type="text" name="confirmEmail" id="confirmEmail" onfocusout="focusOutFromInput(this)" onfocusin="focusInToInput(this)">
         </div>
         <div class="detail">
           <label for="address">address</label>
           <span>Please enter address</span>
-          <input type="text" name="address" id="address">
+          <input type="text" name="address" id="address" onfocusout="focusOutFromInput(this)" onfocusin="focusInToInput(this)">
         </div>
         <div class="detail">
           <label for="postcode">postcode</label>
           <span>Please enter postcode</span>
-          <input type="text" name="postcode" id="postcode">
+          <input type="text" name="postcode" id="postcode" onfocusout="focusOutFromInput(this)" onfocusin="focusInToInput(this)">
         </div>
         <div class="detail">
           <label for="contactNumber">contact number</label>
           <span>Please enter contact number</span>
-          <input type="text" name="contactNumber" id="contactNumber">
+          <input type="text" name="contactNumber" id="contactNumber" onfocusout="focusOutFromInput(this)" onfocusin="focusInToInput(this)">
         </div>
       </form>
     </div>
@@ -129,7 +130,7 @@
       </ul>
       <hr>
       <p class="total">Total: $10.68</p>
-      <button class="submit">Place order</button>
+      <button class="submit" onclick="clickSubmit(this)">Place order</button>
     </div>
   </body>
 </html>
