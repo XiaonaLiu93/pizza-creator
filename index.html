@@ -45,15 +45,15 @@
     <div>
       <h1>Select your pizza</h1>
       <div class="sizes">
-        <div class="size sizes__large size--active">
+        <div class="size sizes__large" data-name="large" data-price="13.99" onclick=" (this)">
           <img src="./assets/size/pizza.png" alt="large">
           <span>large (13")</span>
         </div>
-        <div class="size sizes__medium">
+        <div class="size sizes__medium" data-name="medium" data-price="12.99" onclick="clickSize(this)">
           <img src="./assets/size/pizza.png" alt="medium">
           <span>medium (11")</span>
         </div>
-        <div class="size sizes__small">
+        <div class="size sizes__small" data-name="small" data-price="11.99" onclick="clickSize(this)">
           <img src="./assets/size/pizza.png" alt="small">
           <span>small (9")</span>
         </div>
@@ -115,21 +115,9 @@
     <div>
       <h1>Summary</h1>
       <ul class="items">
-        <li class="item">
-          <span>large pizza</span>
-          <span>$13.99</span>
-        </li>
-        <li class="item">
-          <span>chili</span>
-          <span>$0.69</span>
-        </li>
-        <li class="item">
-          <span>tomato</span>
-          <span>$0.69</span>
-        </li>
       </ul>
       <hr>
-      <p class="total">Total: $10.68</p>
+      <p class="total">Total: $<span class="total__amount">0</span></p>
       <button class="submit" onclick="clickSubmit(this)">Place order</button>
     </div>
   </body>

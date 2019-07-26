@@ -1,4 +1,5 @@
 const DETAIL_ERROR_CLASS_NAME = 'detail--error';
+const SIZE_ACTIVE_CLASS_NAME = 'size--active';
 
 function getDetailNode(element) {
   return element.closest('.detail');
@@ -59,4 +60,86 @@ function clickSubmit() {
   if (hasValue) {
     console.log("All filled up!");
   }
+}
+
+function activateSize(element) {
+  element.classList.add(SIZE_ACTIVE_CLASS_NAME);
+}
+
+function addSizeToSummary(element) {
+  const summaryItem = document.createElement('li');
+  summaryItem.classList.add('item');
+
+  const { name, price } = element.dataset;
+  const nameSpan = document.createElement('span');
+  nameSpan.classList.add('item__name');
+  nameSpan.innerText = `${name} pizza`;
+
+  const priceSpan = document.createElement('span');
+  priceSpan.classList.add('item__price')
+  priceSpan.innerText = `$${price}`;
+
+  summaryItem.append(nameSpan, priceSpan);
+  document.querySelector('.items').prepend(summaryItem);
+}
+
+function addSizeToTotal(element) {
+  const { price } = element.dataset;
+  const total = document.querySelector('.total__amount');
+  total.innerText = parseFloat(total.innerText) + parseFloat(price);
+}
+
+function selectSize(element) {
+  activateSize(element);
+  addSizeToSummary(element);
+  addSizeToTotal(element);
+}
+
+function deactivateSize(element) {
+  element.classList.remove(SIZE_ACTIVE_CLASS_NAME);
+}
+
+function removeSizeFromSummary(element) {
+  const { name } = element.dataset;
+
+  document.querySelectorAll('.item').forEach((item) => {
+    if ( item.querySelector('.item__name').innerHTML !== `${name} pizza`) {
+      return;
+    }
+
+    item.parentNode.removeChild(item);
+  });
+}
+
+function minusSizeFromTotal(element) {
+  const { price } = element.dataset;
+  const total = document.querySelector('.total__amount');
+  total.innerText = total.innerText - price;
+} 
+
+function unselectSize(element) {
+  if (!element.classList.contains(SIZE_ACTIVE_CLASS_NAME)) {
+    return;
+  }
+
+  deactivateSize(element);
+  removeSizeFromSummary(element);
+  minusSizeFromTotal(element);
+}
+
+function clickSize(element) {
+  const isSelected = element.classList.contains(SIZE_ACTIVE_CLASS_NAME);
+
+  if (isSelected) {
+    return;
+  }
+
+  document.querySelectorAll('.size').forEach((size) => {
+    if (size === element) {
+      selectSize(element);
+      return;
+    }
+
+    unselectSize(size);
+  });
 }
