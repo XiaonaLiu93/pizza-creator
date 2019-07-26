@@ -18,8 +18,7 @@ h1 {
   grid-row-gap: 32px;
 }
 
-.detail,
-.item {
+.detail {
   display: grid;
   grid-template-columns: 1fr auto;
 }
@@ -75,8 +74,7 @@ h1 {
   grid-template-columns: repeat(3, auto);
 }
 
-.size,
-.topping {
+.size {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -124,6 +122,10 @@ h1 {
 }
 
 .topping {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  cursor: pointer;
   background: rgba(0,0,0,0.05);
   border-radius: 3px;
 }
@@ -146,13 +148,56 @@ h1 {
   background: #1a98e1;
 }
 
-.topping:hover > span,
-.topping--active > span {
+.topping:hover span,
+.topping:hover button,
+.topping--active span,
+.topping--active button {
   color: #ffffff;
+}
+
+.topping__amount {
+  display: grid;
+  grid-template-columns: 2rem auto 2rem;
+  height: 100%;
+  align-items: center;
+  grid-gap: 0.5rem;
+}
+
+.topping__amount > span {
+  width: 2rem;
+  text-align: center;
+}
+
+.topping__amount > button {
+  border: 0;
+  background: rgba(0, 0, 0, 0.1);
+  height: 100%;
+  outline: 0;
+  cursor: pointer;
+}
+
+.topping__amount > button:hover {
+  background-color: #1a98e1;
+  color: white;
 }
 
 .items {
   padding: 0;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 100px auto 20px auto 1fr;
+  margin-bottom: 3px;
+}
+
+.item__amount {
+  text-align: center;
+}
+
+.item__price {
+  position: absolute;
+  right: 20px;
 }
 
 .item > span {
@@ -160,6 +205,11 @@ h1 {
   color: rgba(0,0,0,0.7);
   text-transform: capitalize;
   padding: 2px;
+}
+
+.item > button {
+  border-radius: 50%;
+  outline: none;
 }
 
 .total {

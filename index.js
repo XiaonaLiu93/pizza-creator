@@ -152,12 +152,36 @@ function clickSize(element) {
   });
 }
 
+function getToppingNode(element) {
+  return element.closest('.topping');
+}
+
+function getToppingAmountNode(element) {
+  return element.closest('.topping__amount');
+}
+
+function changeAmountOnSummary(element) {
+  const toppingNode = getToppingNode(element);
+  const { name, amount, price } = toppingNode.dataset;
+  const items = document.querySelectorAll('.item');
+  items.forEach((item) => {
+    if (item.querySelector('.item__name').innerHTML !== name) {
+      return;
+    }
+
+    item.querySelector('.item__amount').innerText = amount;
+    item.querySelector('.item__price').innerText = `$${toFixed(amount * price, 2)}`;
+  });
+}
+
 function deactivateTopping(element) {
-  element.classList.remove(TOPPING_ACTIVE_CLASS_NAME);
+  const toppingNode = getToppingNode(element);
+  toppingNode.classList.remove(TOPPING_ACTIVE_CLASS_NAME);
 }
 
 function removeToppingFromSummary(element) {
-  const { name } = element.dataset;
+  const toppingNode = getToppingNode(element);
+  const { name } = toppingNode.dataset;
 
   document.querySelectorAll('.item').forEach((item) => {
     if ( item.querySelector('.item__name').innerHTML !== name) {
@@ -168,57 +192,134 @@ function removeToppingFromSummary(element) {
   });
 }
 
-function minusToppingFromTotal(element) {
-  const { price } = element.dataset;
+function lastTimeMinusClick(element) {
+  deactivateTopping(element);
+  removeToppingFromSummary(element);
+}
+
+function minusAmountOnTopping(element, toMinus) {
+  const toppingAmountNode = getToppingAmountNode(element);
+  const toppingNode = getToppingNode(element);
+  let amount = 0;
+  amount = toppingAmountNode.querySelector('span').innerText - toMinus;
+  toppingNode.dataset.amount = amount;
+  toppingAmountNode.querySelector('span').innerText = amount;
+}
+
+function minusAmount(element, toMinus) {
+  minusAmountOnTopping(element, toMinus);
+  changeAmountOnSummary(element); //minus
+}
+
+function minusFromTotal(element) {
+  const toppingNode = getToppingNode(element);
+  const { price } = toppingNode.dataset;
   const total = document.querySelector('.total__amount');
   total.innerText = toFixed(total.innerText - price, 2);
 }
 
-function unchooseTopping(element) {
-  deactivateTopping(element);
-  removeToppingFromSummary(element);
-  minusToppingFromTotal(element);
+function fullTimeMinusClick(element, toMinus) {
+  minusAmount(element, toMinus);
+  minusFromTotal(element);
+}
+
+function clickMinusOnTopping(element, toMinus) {
+  const toppingNode = getToppingNode(element);
+  const { amount: afterMinusAmount } = toppingNode.dataset;
+
+  if (parseFloat(afterMinusAmount) === 0) {
+    return;
+  }
+
+  if (parseFloat(afterMinusAmount) === 1) {
+    lastTimeMinusClick(element);
+  }
+
+  fullTimeMinusClick(element, toMinus);
 }
 
 function activateTopping(element) {
-  element.classList.add(TOPPING_ACTIVE_CLASS_NAME);
+  const toppingNode = getToppingNode(element);
+  toppingNode.classList.add(TOPPING_ACTIVE_CLASS_NAME);
 }
 
 function addToppingToSummary(element) {
   const summaryItem = document.createElement('li');
   summaryItem.classList.add('item');
 
-  const { name, price } = element.dataset;
+  const toppingNode = getToppingNode(element);
+  const { name, price } = toppingNode.dataset;
+
   const nameSpan = document.createElement('span');
   nameSpan.classList.add('item__name');
   nameSpan.innerText = name;
+
+  const minusButton = document.createElement('button');
+  minusButton.classList.add('item__button__minus');
+  minusButton.innerText = '-';
+  minusButton.onclick = () => {
+    let toMinus = 1;
+    clickMinusOnTopping(element, toMinus);
+  };
+
+  const amountNumSpan = document.createElement('span');
+  amountNumSpan.classList.add('item__amount');
+  amountNumSpan.innerText = '1';
+
+  const addButton = document.createElement('button');
+  addButton.classList.add('item__button__add');
+  addButton.innerText = '+';
+  addButton.onclick = () => {
+    let toAdd = 1;
+    clickAddOnTopping(element, toAdd);
+  };
+
   const priceSpan = document.createElement('span');
   priceSpan.classList.add('item__price')
   priceSpan.innerText = `$${price}`;
-  summaryItem.append(nameSpan, priceSpan);
 
+  summaryItem.append(nameSpan, minusButton, amountNumSpan, addButton, priceSpan);
   document.querySelector('.items').append(summaryItem);
 }
 
-function chooseTopping(element) {
+function firstTimeAddClick(element) {
   activateTopping(element);
   addToppingToSummary(element);
-  addToppingToTotal(element);
 }
 
-function addToppingToTotal(element) {
-  const { price } = element.dataset;
+function addAmountOnTopping(element, toAdd) {
+  const toppingAmountNode = getToppingAmountNode(element);
+  const toppingNode = getToppingNode(element);
+  let amount = 0;
+  amount = parseFloat(toppingAmountNode.querySelector('span').innerText) + toAdd;
+  toppingNode.dataset.amount = amount;
+  toppingAmountNode.querySelector('span').innerText = amount;
+}
+
+function addAmount(element, toAdd) {
+  addAmountOnTopping(element, toAdd);
+  changeAmountOnSummary(element);
+}
+
+function addToTotal(element) {
+  const toppingNode = getToppingNode(element);
+  const { price } = toppingNode.dataset;
   const total = document.querySelector('.total__amount');
-  total.innerText = toFixed(parseFloat(total.innerText) + parseFloat(price), 2);
+  total.innerText = toFixed((parseFloat(total.innerText) + parseFloat(price)), 2);
 }
 
-function clickTopping(element) {
-  const isChosen = element.classList.contains(TOPPING_ACTIVE_CLASS_NAME);
+function fullTimeAddClick(element, toAdd) {
+  addAmount(element, toAdd);
+  addToTotal(element);
+}
 
-  if (isChosen) {
-    unchooseTopping(element);
-    return;
+function clickAddOnTopping(element, toAdd) {
+  const toppingNode = getToppingNode(element);
+  const { amount: beforeAddAmount } = toppingNode.dataset;
+
+  if (parseFloat(beforeAddAmount) === 0) {
+    firstTimeAddClick(element);
   }
 
-  chooseTopping(element);
+  fullTimeAddClick(element, toAdd);
 }
