@@ -1,5 +1,13 @@
 const DETAIL_ERROR_CLASS_NAME = 'detail--error';
 const SIZE_ACTIVE_CLASS_NAME = 'size--active';
+const TOPPING_ACTIVE_CLASS_NAME = 'topping--active';
+
+function toFixed(num, s) {
+  let times = Math.pow(10, s);
+  let result = num * times + 0.5;
+  result = parseInt(result, 10) / times;
+  return result;
+}
 
 function getDetailNode(element) {
   return element.closest('.detail');
@@ -86,7 +94,7 @@ function addSizeToSummary(element) {
 function addSizeToTotal(element) {
   const { price } = element.dataset;
   const total = document.querySelector('.total__amount');
-  total.innerText = parseFloat(total.innerText) + parseFloat(price);
+  total.innerText = toFixed(parseFloat(total.innerText) + parseFloat(price), 2);
 }
 
 function selectSize(element) {
@@ -114,7 +122,7 @@ function removeSizeFromSummary(element) {
 function minusSizeFromTotal(element) {
   const { price } = element.dataset;
   const total = document.querySelector('.total__amount');
-  total.innerText = total.innerText - price;
+  total.innerText = toFixed(total.innerText - price, 2);
 } 
 
 function unselectSize(element) {
@@ -142,4 +150,75 @@ function clickSize(element) {
 
     unselectSize(size);
   });
+}
+
+function deactivateTopping(element) {
+  element.classList.remove(TOPPING_ACTIVE_CLASS_NAME);
+}
+
+function removeToppingFromSummary(element) {
+  const { name } = element.dataset;
+
+  document.querySelectorAll('.item').forEach((item) => {
+    if ( item.querySelector('.item__name').innerHTML !== name) {
+      return;
+    }
+
+    item.parentNode.removeChild(item);
+  });
+}
+
+function minusToppingFromTotal(element) {
+  const { price } = element.dataset;
+  const total = document.querySelector('.total__amount');
+  total.innerText = toFixed(total.innerText - price, 2);
+}
+
+function unchooseTopping(element) {
+  deactivateTopping(element);
+  removeToppingFromSummary(element);
+  minusToppingFromTotal(element);
+}
+
+function activateTopping(element) {
+  element.classList.add(TOPPING_ACTIVE_CLASS_NAME);
+}
+
+function addToppingToSummary(element) {
+  const summaryItem = document.createElement('li');
+  summaryItem.classList.add('item');
+
+  const { name, price } = element.dataset;
+  const nameSpan = document.createElement('span');
+  nameSpan.classList.add('item__name');
+  nameSpan.innerText = name;
+  const priceSpan = document.createElement('span');
+  priceSpan.classList.add('item__price')
+  priceSpan.innerText = `$${price}`;
+  summaryItem.append(nameSpan, priceSpan);
+
+  document.querySelector('.items').append(summaryItem);
+}
+
+function chooseTopping(element) {
+  activateTopping(element);
+  addToppingToSummary(element);
+  addToppingToTotal(element);
+}
+
+function addToppingToTotal(element) {
+  const { price } = element.dataset;
+  const total = document.querySelector('.total__amount');
+  total.innerText = toFixed(parseFloat(total.innerText) + parseFloat(price), 2);
+}
+
+function clickTopping(element) {
+  const isChosen = element.classList.contains(TOPPING_ACTIVE_CLASS_NAME);
+
+  if (isChosen) {
+    unchooseTopping(element);
+    return;
+  }
+
+  chooseTopping(element);
 }
