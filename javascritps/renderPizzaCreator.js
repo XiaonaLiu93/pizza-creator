@@ -3,8 +3,9 @@ function renderPizzaCreator() {
   pizzaCreator.classList.add('pizzaCreator');
 
   const selectYourSize = renderSelectYourSize();
+  const chooseYourToppings = renderChooseYourToppings();
   
-  pizzaCreator.append(selectYourSize);
+  pizzaCreator.append(selectYourSize, chooseYourToppings);
 
   return pizzaCreator;
 }
