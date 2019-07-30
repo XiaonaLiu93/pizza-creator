@@ -1,25 +1,4 @@
-function renderSizes() {
-  let state = {
-    sizes: [{
-      name: 'large',
-      price: 13.99,
-      inch: '13',
-    }, {
-      name: 'medium',
-      price: 11.99,
-      inch: '11',
-    }, {
-      name: 'small',
-      price: 9.99,
-      inch: '9',
-    }],
-    
-    selectedSize: {
-      name: 'large',
-      price: 13.99,
-    }
-  }
-
+function renderSizes({ state }) {
   function onSizeClick(name) {
     const { sizes } = state;
     const newSelectedSize = sizes.find((size) => size.name === name);
