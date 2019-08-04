@@ -1,5 +1,25 @@
 function renderPizzaCreator() {
   let state = {
+    inputs: [{
+      label: 'name',
+      value: '',
+    }, {
+      label: 'email',
+      value: '',
+    }, {
+      label: 'confirm email',
+      value: '',
+    }, {
+      label: 'address',
+      value: '',
+    }, {
+      label: 'postcode',
+      value: '',
+    }, {
+      label: 'contact number',
+      value: '',
+    }],
+
     sizes: [{
       name: 'large',
       price: 13.99,
@@ -60,6 +80,54 @@ function renderPizzaCreator() {
     chosenToppings: [],
   };
 
+  const DETAIL_ERROR_CLASS_NAME = 'detail--error';
+
+  function getInputParentNode(detailInput) {
+    return detailInput.closest('.detail');
+  }
+
+  function removeErrorMessage(parentNode) {
+    parentNode.classList.remove(DETAIL_ERROR_CLASS_NAME);
+  }
+  
+  function showErrorMessage(parentNode) {
+    parentNode.classList.add(DETAIL_ERROR_CLASS_NAME);
+  }
+
+  function setStateByDetails(newInputs) {
+    state = {
+      ...state,
+      inputs: [...newInputs],
+    }
+  }
+
+  function onInputChange(detailInput) {
+    const { inputs } = state;
+
+    const newInputs = inputs.map((input) => {
+      if (input.label !== detailInput.name) {
+        return input;
+      }
+
+      return {
+        label: detailInput.name,
+        value: detailInput.value,
+      }
+    });
+
+    setStateByDetails(newInputs);
+
+    const input = state.inputs.find((input) => input.label === detailInput.name);
+    const parentNode = getInputParentNode(detailInput);
+
+    if (input.value.length === 0) {
+      showErrorMessage(parentNode);
+      return;
+    }
+
+    removeErrorMessage(parentNode);
+  }
+
   function setStateBySize(newSelectedSize) {
     state = {
       ...state,
@@ -69,7 +137,7 @@ function renderPizzaCreator() {
 
   function renderSizesDiv(newChosenToppings) {
     setStateBySize(newChosenToppings);
-    render({ state, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
+    render({ state, onInputChange, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
   }
 
   function onSizeClick(name) {
@@ -87,7 +155,7 @@ function renderPizzaCreator() {
 
   function renderToppingsDiv(newChosenToppings) {
     setStateByToppings(newChosenToppings);
-    render({ state, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
+    render({ state, onInputChange, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
   }
 
   function lastTimeDecreaseClick(name) {
@@ -185,11 +253,12 @@ function renderPizzaCreator() {
   const pizzaCreator = document.createElement('div');
   pizzaCreator.classList.add('pizzaCreator');
 
+  const enterYourDetails = renderEnterYourDetails({ state, onInputChange });
   const selectYourSize = renderSelectYourSize({ state, onSizeClick });
   const chooseYourToppings = renderChooseYourToppings({ state, onDecreaseButtonClick, onIncreaseButtonClick });
   const summary= renderSummary({ state, onDecreaseButtonClick, onIncreaseButtonClick });
   
-  pizzaCreator.append(selectYourSize, chooseYourToppings, summary);
+  pizzaCreator.append(enterYourDetails, selectYourSize, chooseYourToppings, summary);
 
   return pizzaCreator;
 }
