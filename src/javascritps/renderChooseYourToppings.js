@@ -1,4 +1,7 @@
-function renderChooseYourToppings({ state, onDecreaseButtonClick, onIncreaseButtonClick}) {
+import renderTitle from './renderTitle';
+import renderToppings from './renderToppings';
+
+export default function renderChooseYourToppings({ state, onDecreaseButtonClick, onIncreaseButtonClick}) {
   const chooseYourToppings = document.createElement('div');
 
   const chooseYourToppingsTitle = renderTitle({ title: 'Choose your toppings' });

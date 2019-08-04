@@ -1,10 +1,12 @@
-function renderErrorMessageBox() {
+import errorImg from '../assets/error/error.png';
+
+export default function renderErrorMessageBox() {
   const errorMessageBox = document.createElement('div');
   errorMessageBox.classList.add('message');
   errorMessageBox.classList.add('message--hidden');
 
   const errorMessageImage = document.createElement('img');
-  errorMessageImage.src = './assets/error/error.png';
+  errorMessageImage.src = errorImg;
   errorMessageImage.alt = 'error';
 
   const errorMessageSpan = document.createElement('span');

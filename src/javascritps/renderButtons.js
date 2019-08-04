@@ -1,4 +1,7 @@
-function renderButtons({ onSubmitButtonClick, onResetButtonClick }) {
+import renderSubmitButton from './renderSubmitButton';
+import renderResetButton from './renderResetButton';
+
+export default function renderButtons({ onSubmitButtonClick, onResetButtonClick }) {
   const buttons = document.createElement('div');
   buttons.classList.add('buttons');
   

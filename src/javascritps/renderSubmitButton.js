@@ -1,4 +1,4 @@
-function renderSubmitButton({ onSubmitButtonClick }) {
+export default function renderSubmitButton({ onSubmitButtonClick }) {
   const submitButton = document.createElement('button');
   submitButton.classList.add('buttons__submit');
   submitButton.innerText = 'Place Order';

@@ -1,4 +1,4 @@
-function renderSummarySize({ selectedSize }) {
+export default function renderSummarySize({ selectedSize }) {
   const { name, price } = selectedSize;
 
   const summaryItem = document.createElement('li');

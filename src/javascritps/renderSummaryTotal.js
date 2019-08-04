@@ -1,4 +1,6 @@
-function renderSummaryTotal({ selectedSize, chosenToppings }) {
+import toFixed from '../helpers/toFixed';
+
+export default function renderSummaryTotal({ selectedSize, chosenToppings }) {
   const summaryTotal = document.createElement('p');
   summaryTotal.classList.add('total');
 

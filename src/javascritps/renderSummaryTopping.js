@@ -1,4 +1,6 @@
-function renderSummaryTopping({ chosenTopping, onDecreaseButtonClick, onIncreaseButtonClick }) {
+import toFixed from '../helpers/toFixed';
+
+export default function renderSummaryTopping({ chosenTopping, onDecreaseButtonClick, onIncreaseButtonClick }) {
   const { name, price, amount } = chosenTopping;
 
   const summaryItem = document.createElement('li');

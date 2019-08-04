@@ -1,4 +1,6 @@
-function renderSizes({ state, onSizeClick }) {
+import renderSize from './renderSize';
+
+export default function renderSizes({ state, onSizeClick }) {
   const sizesDiv = document.createElement('div');
   sizesDiv.classList.add('sizes');
 

@@ -1,4 +1,8 @@
-function renderSummaryContent({ state, onDecreaseButtonClick, onIncreaseButtonClick }) {
+import renderSummarySize from './renderSummarySize';
+import renderSummaryToppings from './renderSummaryToppings';
+import renderSummaryTotal from './renderSummaryTotal';
+
+export default function renderSummaryContent({ state, onDecreaseButtonClick, onIncreaseButtonClick }) {
   const { selectedSize, chosenToppings } = state;
 
   const summaryList = document.createElement('ul');

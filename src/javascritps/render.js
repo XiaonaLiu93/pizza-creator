@@ -1,4 +1,11 @@
-function render({ 
+import renderErrorMessageBox from './renderErrorMessageBox';
+import renderEnterYourDetails from './renderEnterYourDetails';
+import renderSelectYourSize from './renderSelectYourSize';
+import renderChooseYourToppings from './renderChooseYourToppings';
+import renderSummary from './renderSummary';
+import renderButtons from './renderButtons';
+
+export default function render({ 
   state, 
   onInputChange, 
   onSizeClick, 

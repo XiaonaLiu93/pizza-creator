@@ -1,7 +1,7 @@
-function renderTopping({ topping, chosenToppings, onDecreaseButtonClick, onIncreaseButtonClick }) {
+export default function renderTopping({ topping, chosenToppings, onDecreaseButtonClick, onIncreaseButtonClick }) {
   const TOPPING_ACTIVE_CLASS_NAME = 'topping--active';
 
-  const { name } = topping;
+  const { name, image } = topping;
 
   const toppingDiv = document.createElement('div');
   toppingDiv.classList.add('topping');
@@ -21,7 +21,7 @@ function renderTopping({ topping, chosenToppings, onDecreaseButtonClick, onIncre
   const amount = chosenTopping ? chosenTopping.amount : 0;
 
   const toppingImg = document.createElement('img');
-  toppingImg.src = `./assets/toppings/${name}.svg`;
+  toppingImg.src = image;
   toppingImg.alt = name;
 
   const nameSpan = document.createElement('span');

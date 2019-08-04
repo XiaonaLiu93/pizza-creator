@@ -1,4 +1,6 @@
-function renderSize({ size, selectedSize, onSizeClick }) {
+import pizzaImg from '../assets/size/pizza.png';
+
+export default function renderSize({ size, selectedSize, onSizeClick }) {
   const SIZE_ACTIVE_CLASS_NAME = 'size--active';
 
   const { name, inch } = size;
@@ -19,7 +21,7 @@ function renderSize({ size, selectedSize, onSizeClick }) {
   }
 
   const sizeImg = document.createElement('img');
-  sizeImg.src = './assets/size/pizza.png';
+  sizeImg.src = pizzaImg;
   sizeImg.alt = name;
 
   const nameSpan = document.createElement('span');

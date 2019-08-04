@@ -1,4 +1,6 @@
-function renderToppings({ state, onDecreaseButtonClick, onIncreaseButtonClick }) {
+import renderTopping from './renderTopping';
+
+export default function renderToppings({ state, onDecreaseButtonClick, onIncreaseButtonClick }) {
   const toppingsDiv = document.createElement('div');
   toppingsDiv.classList.add('toppings');
 

@@ -1,4 +1,6 @@
-function renderDetails({ state, onInputChange }) {
+import renderDetail from './renderDetail';
+
+export default function renderDetails({ state, onInputChange }) {
   const detailsFrom = document.createElement('form');
   detailsFrom.classList.add('details');
 

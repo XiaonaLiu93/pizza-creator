@@ -1,4 +1,7 @@
-function renderEnterYourDetails({ state, onInputChange }) {
+import renderTitle from './renderTitle';
+import renderDetails from './renderDetails';
+
+export default function renderEnterYourDetails({ state, onInputChange }) {
   const enterYourDetails = document.createElement('div');
 
   const enterYourDetailsTitle = renderTitle({ title: 'Enter your details' });

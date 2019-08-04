@@ -1,4 +1,4 @@
-function renderDetail({ input, onInputChange }) {
+export default function renderDetail({ input, onInputChange }) {
   const { label, value } = input;
 
   const detailDiv = document.createElement('div');
