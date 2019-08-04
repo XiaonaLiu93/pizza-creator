@@ -1,5 +1,5 @@
 function renderPizzaCreator() {
-  let state = {
+  let initialState = {
     inputs: [{
       label: 'name',
       value: '',
@@ -80,7 +80,10 @@ function renderPizzaCreator() {
     chosenToppings: [],
   };
 
+  let state = {...initialState};
+
   const DETAIL_ERROR_CLASS_NAME = 'detail--error';
+  const HIDDEN_ERROR_CLASS_NAME = 'message--hidden';
 
   function getInputParentNode(detailInput) {
     return detailInput.closest('.detail');
@@ -137,7 +140,16 @@ function renderPizzaCreator() {
 
   function renderSizesDiv(newChosenToppings) {
     setStateBySize(newChosenToppings);
-    render({ state, onInputChange, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
+
+    render({ 
+      state, 
+      onInputChange, 
+      onSizeClick, 
+      onDecreaseButtonClick, 
+      onIncreaseButtonClick, 
+      onSubmitButtonClick,
+      onResetButtonClick 
+    });
   }
 
   function onSizeClick(name) {
@@ -155,7 +167,16 @@ function renderPizzaCreator() {
 
   function renderToppingsDiv(newChosenToppings) {
     setStateByToppings(newChosenToppings);
-    render({ state, onInputChange, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
+
+    render({ 
+      state, 
+      onInputChange, 
+      onSizeClick, 
+      onDecreaseButtonClick, 
+      onIncreaseButtonClick, 
+      onSubmitButtonClick,
+      onResetButtonClick 
+    });
   }
 
   function lastTimeDecreaseClick(name) {
@@ -249,16 +270,66 @@ function renderPizzaCreator() {
 
     fullTimeIncreseClick(name);
   }
+
+  function showEmptyInput() {
+    const { inputs } = state;
+
+    inputs.forEach((input) => {
+      if (input.value.length !== 0) {
+        return;
+      }
+
+      const detailInput = document.querySelector(`input[name='${input.label}']`);
+
+      const parentNode = getInputParentNode(detailInput);
+
+      showErrorMessage(parentNode);
+    });
+  }
+
+  function showErrorMessageBox(errorMessageBox) {
+    errorMessageBox.classList.remove(HIDDEN_ERROR_CLASS_NAME);
+  }
+
+  function showEmptyChosenRTopping() {
+    const { chosenToppings } = state;
+    const errorMessageBox = document.querySelector('.message');
+
+    if (chosenToppings.length === 0) {
+      showErrorMessageBox(errorMessageBox);
+    }
+  }
+
+  function onSubmitButtonClick() {
+    showEmptyInput();
+    showEmptyChosenRTopping();
+  }
+
+  function onResetButtonClick() {
+    state = {...initialState};
+
+    render({ 
+      state, 
+      onInputChange, 
+      onSizeClick, 
+      onDecreaseButtonClick, 
+      onIncreaseButtonClick, 
+      onSubmitButtonClick,
+      onResetButtonClick 
+    });
+  }
   
   const pizzaCreator = document.createElement('div');
   pizzaCreator.classList.add('pizzaCreator');
 
+  const errorMessageBox = renderErrorMessageBox();
   const enterYourDetails = renderEnterYourDetails({ state, onInputChange });
   const selectYourSize = renderSelectYourSize({ state, onSizeClick });
   const chooseYourToppings = renderChooseYourToppings({ state, onDecreaseButtonClick, onIncreaseButtonClick });
   const summary= renderSummary({ state, onDecreaseButtonClick, onIncreaseButtonClick });
+  const buttons = renderButtons({ onSubmitButtonClick, onResetButtonClick });
   
-  pizzaCreator.append(enterYourDetails, selectYourSize, chooseYourToppings, summary);
+  pizzaCreator.append(errorMessageBox, enterYourDetails, selectYourSize, chooseYourToppings, summary, buttons);
 
   return pizzaCreator;
 }
