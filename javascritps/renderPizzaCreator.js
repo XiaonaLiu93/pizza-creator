@@ -59,13 +59,137 @@ function renderPizzaCreator() {
 
     chosenToppings: [],
   };
+
+  function setStateBySize(newSelectedSize) {
+    state = {
+      ...state,
+      selectedSize: {...newSelectedSize},
+    }
+  }
+
+  function renderSizesDiv(newChosenToppings) {
+    setStateBySize(newChosenToppings);
+    render({ state, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
+  }
+
+  function onSizeClick(name) {
+    const { sizes } = state;
+    const newSelectedSize = sizes.find((size) => size.name === name);
+    renderSizesDiv(newSelectedSize);
+  }
+
+  function setStateByToppings(newChosenToppings) {
+    state = {
+      ...state,
+      chosenToppings: [...newChosenToppings]
+    };
+  }
+
+  function renderToppingsDiv(newChosenToppings) {
+    setStateByToppings(newChosenToppings);
+    render({ state, onSizeClick, onDecreaseButtonClick, onIncreaseButtonClick });
+  }
+
+  function lastTimeDecreaseClick(name) {
+    const { chosenToppings } = state;
+
+    const newChosenToppings = chosenToppings.filter(({ name: chosenToppingName }) => {
+      return chosenToppingName !== name;
+    });
+
+    renderToppingsDiv(newChosenToppings);
+  }
+
+  function fullTimeDecreseClick(name) {
+    const { chosenToppings } = state;
+
+    const newChosenToppings = chosenToppings.map((chosenTopping) => {
+      if (chosenTopping.name === name) {
+        chosenTopping.amount -= 1;
+      }
+
+      return chosenTopping;
+    });
+
+    renderToppingsDiv(newChosenToppings);
+  }
+
+  function onDecreaseButtonClick(name) {
+    const { chosenToppings } = state;
+
+    const chosenTopping = chosenToppings.find(({ name: chosenToppingName }) => {
+      return chosenToppingName === name;
+    });
+
+    if (!chosenTopping) {
+      return;
+    }
+
+    if (chosenTopping.amount === 1) {
+      lastTimeDecreaseClick(name);
+      return;
+    }
+
+    fullTimeDecreseClick(name);
+  }
+
+  function firstTimeIncreaseClick(name) {
+    const { toppings, chosenToppings } = state;
+
+    const newTopping = toppings.find(({ name: thatName}) => {
+      return name === thatName;
+    });
+
+    const newChosenToppings = [
+      ...chosenToppings,
+      {
+        ...newTopping,
+        amount: 1,
+      }
+    ];
+
+    renderToppingsDiv(newChosenToppings);
+  }
+
+  function fullTimeIncreseClick(name) {
+    const { chosenToppings } = state;
+
+    const newChosenToppings = chosenToppings.map((chosenTopping) => {
+      if (chosenTopping.name === name) {
+        chosenTopping.amount += 1;
+      }
+
+      return chosenTopping;
+    });
+
+    renderToppingsDiv(newChosenToppings);
+
+    return;
+  }
+
+  function onIncreaseButtonClick(name) {
+    const { chosenToppings } = state;
+    
+    const chosenTopping = chosenToppings.find(({ name: chosenToppingName }) => {
+      return chosenToppingName === name;
+    });
+
+    if (!chosenTopping) {
+      firstTimeIncreaseClick(name);
+      return;
+    }
+
+    fullTimeIncreseClick(name);
+  }
+  
   const pizzaCreator = document.createElement('div');
   pizzaCreator.classList.add('pizzaCreator');
 
-  const selectYourSize = renderSelectYourSize({ state });
-  const chooseYourToppings = renderChooseYourToppings({ state });
+  const selectYourSize = renderSelectYourSize({ state, onSizeClick });
+  const chooseYourToppings = renderChooseYourToppings({ state, onDecreaseButtonClick, onIncreaseButtonClick });
+  const summary= renderSummary({ state, onDecreaseButtonClick, onIncreaseButtonClick });
   
-  pizzaCreator.append(selectYourSize, chooseYourToppings);
+  pizzaCreator.append(selectYourSize, chooseYourToppings, summary);
 
   return pizzaCreator;
 }
