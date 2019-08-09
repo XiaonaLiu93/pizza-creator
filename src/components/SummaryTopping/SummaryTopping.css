@@ -1,0 +1,26 @@
+.item {
+  display: grid;
+  grid-template-columns: 100px auto 20px auto 1fr;
+  margin-bottom: 3px;
+}
+
+.item__amount {
+  text-align: center;
+}
+
+.item__price {
+  position: absolute;
+  right: 20px;
+}
+
+.item > span {
+  font-size: 16px;
+  color: rgba(0,0,0,0.7);
+  text-transform: capitalize;
+  padding: 2px;
+}
+
+.item > button {
+  border-radius: 50%;
+  outline: none;
+}

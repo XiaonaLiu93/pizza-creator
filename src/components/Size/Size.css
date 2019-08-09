@@ -1,0 +1,42 @@
+.size {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  cursor: pointer;
+}
+
+.size > img {
+  --img-width: 60px; 
+  padding: 8px; 
+  border-radius: 50%; 
+}
+
+
+.sizes__large > img {
+  width: calc(var(--img-width) * 1.2);
+}
+
+.sizes__medium > img {
+  width: var(--img-width);
+}
+
+.sizes__small > img {
+  width: calc(var(--img-width) * 0.8);
+}
+
+.size > span {
+  text-transform: capitalize;
+  color: rgba(0,0,0,0.7);
+  padding: 0 6px 0 12px;
+}
+
+.size:hover > img,
+.size--active > img {
+  background-color: #dadada;
+}
+
+
+.size:hover > span,
+.size--active > span {
+  color:  #1a98e1;
+}
