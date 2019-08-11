@@ -4,21 +4,39 @@ import Inputs from '../Inputs';
 import Sizes from '../Sizes';
 import Toppings from '../Toppings';
 import Summary from '../Summary';
-import SubmitButton from '../SubmitButton';
+import Buttons from '../Buttons';
 import './PizzaCreator.css';
 
 export default class PizzaCreator extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
+    this.initialState = {
       details: {
-        name: '',
-        email: '',
-        confirmEmail: '',
-        address: '',
-        postcode: '',
-        contactNumber: '',
+        name: {
+          value: '',
+          showError: false,
+        },
+        email: {
+          value: '',
+          showError: false,
+        },
+        confirmEmail: {
+          value: '',
+          showError: false,
+        },
+        address: {
+          value: '',
+          showError: false,
+        },
+        postcode: {
+          value: '',
+          showError: false,
+        },
+        contactNumber: {
+          value: '',
+          showError: false,
+        },
       },
 
       selectedSize: {
@@ -31,11 +49,14 @@ export default class PizzaCreator extends React.Component {
       submitted: false,
     };
 
+    this.state = {...this.initialState};
+
     this.changeInput = this.changeInput.bind(this);
     this.selectSize = this.selectSize.bind(this);
     this.decreaseChosenToppingAmount = this.decreaseChosenToppingAmount.bind(this);
     this.increaseChosenToppingAmount = this.increaseChosenToppingAmount.bind(this);
     this.clickSubmitButton = this.clickSubmitButton.bind(this);
+    this.clickResetButton = this.clickResetButton.bind(this);
   }
 
   setDetails(newDetails) {
@@ -49,7 +70,10 @@ export default class PizzaCreator extends React.Component {
 
     const newDetails = {
       ...details,
-      [name]: value,
+      [name]: {
+        value: value,
+        showError: true,
+      }
     };
 
     this.setDetails(newDetails);
@@ -154,6 +178,10 @@ export default class PizzaCreator extends React.Component {
     this.setDetailSubmitted(newStatus);
   }
 
+  clickResetButton() {
+    this.setState(this.initialState);
+  }
+
   render() {
     const { details, selectedSize, chosenToppings, submitted } = this.state;
 
@@ -183,8 +211,9 @@ export default class PizzaCreator extends React.Component {
           onAmountDecreased={this.decreaseChosenToppingAmount}
           onAmountIncreased={this.increaseChosenToppingAmount}
         />
-        <SubmitButton 
+        <Buttons 
           onSubmitButtonClicked={this.clickSubmitButton}
+          onResetButtonClicked={this.clickResetButton}
         />
       </div>
     );

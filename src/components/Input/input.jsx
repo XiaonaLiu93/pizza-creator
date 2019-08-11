@@ -1,53 +1,31 @@
 import React from 'react';
 import './input.css';
 
-export default class Input extends React.Component {
-  constructor(props) {
-    super(props);
+function setInputClassName(value, showError, submitted) {
+  const errorInputClassName = "input input--error";
+  const noErrorInputClassName = "input";
 
-    this.state = {
-      showError: false,
-    };
+  const isError = !value && (showError || submitted);
 
-    this.setShowError= this.setShowError.bind(this);
+  if (isError) {
+    return errorInputClassName;
   }
 
-  setShowError(newStatus) {
-    this.setState({
-      showError: newStatus,
-    });
-  }
+  return noErrorInputClassName;
+}
 
-  setInputClassName(value) {
-    const errorInputClassName = "input input--error";
-    const noErrorInputClassName = "input";
-
-    const { submitted } = this.props;
-    const { showError } = this.state;
-
-    const isError = !value && (showError || submitted);
+export default function Input({ input, details, submitted, onInputChanged }) {
+  const { name, label } = input;
+  const value  = details[name].value;
+  const showError = details[name].showError;
   
-    if (isError) {
-      return errorInputClassName;
-    }
-  
-    return noErrorInputClassName;
-  }  
-
-  render() {
-    const { input, details, onInputChanged } = this.props;
-    const { name, label } = input;
-    const value  = details[name];
-    
-    return (
-      <div className={this.setInputClassName(value)}>
-        <label htmlFor={name}>{label}</label>
-        <span></span>
-        <input type="text" name={name} id={name} onChange={({ target:{ value } }) => {
-          onInputChanged(name, value);
-          this.setShowError(true);
-        }}></input>
-      </div>
-    );
-  }
+  return (
+    <div className={setInputClassName(value, showError, submitted)}>
+      <label htmlFor={name}>{label}</label>
+      <span></span>
+      <input type="text" name={name} id={name} onChange={({ target:{ value } }) => {
+        onInputChanged(name, value, );
+      }}></input>
+    </div>
+  );
 }
