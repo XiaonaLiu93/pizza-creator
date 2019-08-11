@@ -3,7 +3,7 @@ import Title from '../Title';
 import Input from '../Input';
 import './inputs.css';
 
-export default function Inputs() {
+export default function Inputs({ details, submitted, onInputChanged }) {
   const inputs = [
     {
       name: 'name',
@@ -34,7 +34,10 @@ export default function Inputs() {
           inputs.map((input) =>
             <Input 
               key={input.name} 
-              input={input} 
+              input={input}
+              details={details}
+              submitted={submitted}
+              onInputChanged={onInputChanged} 
             />)
         }
       </form>

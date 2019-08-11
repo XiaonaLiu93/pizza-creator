@@ -11,11 +11,14 @@ function setSizeClassName(name, selectedSize) {
   return sizeClassName;
 }
 
-export default function Size({ size, selectedSize }) {
+export default function Size({ size, selectedSize, onSizeSelected }) {
   const { name, inch } = size;
   
   return (
-    <div className={setSizeClassName(name, selectedSize)}>
+    <div 
+      className={setSizeClassName(name, selectedSize)}
+      onClick={() => onSizeSelected(size)}
+    >
       <img src={pizzaImg} alt={name}></img>
       <span>{`${name}(${inch}\")`}</span>
     </div>

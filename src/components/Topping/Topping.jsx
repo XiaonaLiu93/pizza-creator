@@ -20,16 +20,16 @@ function getChosenToppingAmount(name, chosenToppings) {
   return amount;
 }
 
-export default function Topping({ topping, chosenToppings }) {
+export default function Topping({ topping, chosenToppings, onAmountDecreased, onAmountIncreased }) {
   const { name, image } = topping;
 
   return (
     <div className={setToppingClassName(name, chosenToppings)}>
       <img src={image} alt={name}></img>
       <span>{name}</span>
-      <button type="button">-</button>
+      <button type="button" onClick={() => onAmountDecreased(topping)}>-</button>
       <span className="topping__amount">{getChosenToppingAmount(name, chosenToppings)}</span>
-      <button type="button">+</button>
+      <button type="button" onClick={() => onAmountIncreased(topping)}>+</button>
     </div>
   );
 }

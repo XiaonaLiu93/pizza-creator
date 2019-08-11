@@ -3,7 +3,7 @@ import Title from '../Title';
 import Size from '../Size';
 import './Sizes.css';
 
-export default function Sizes({ selectedSize }) {
+export default function Sizes({ selectedSize, onSizeSelected }) {
   const sizes = [
     {
       name: 'large',
@@ -30,6 +30,7 @@ export default function Sizes({ selectedSize }) {
               key={size.name} 
               size={size} 
               selectedSize={selectedSize} 
+              onSizeSelected={onSizeSelected}
             />)
         }
       </div>

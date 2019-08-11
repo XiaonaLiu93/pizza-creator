@@ -15,7 +15,7 @@ import sweetcornImg from '../../assets/toppings/sweetcorn.svg';
 import tomatoImg from '../../assets/toppings/tomato.svg';
 import './Toppings.css';
 
-export default function Toppings({ chosenToppings }) {
+export default function Toppings({ chosenToppings, onAmountDecreased, onAmountIncreased }) {
   const toppings = [
     {
       name: 'anchovy',
@@ -78,6 +78,8 @@ export default function Toppings({ chosenToppings }) {
               key={topping.name} 
               topping={topping} 
               chosenToppings={chosenToppings} 
+              onAmountDecreased={onAmountDecreased}
+              onAmountIncreased={onAmountIncreased}
             />)
         }
       </div>
