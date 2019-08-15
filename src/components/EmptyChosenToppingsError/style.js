@@ -1,4 +1,6 @@
-.message {
+import styled from 'styled-components';
+
+export const ErrorShown = styled.section`
   position: fixed;
   background-color: white;
   top: 0.5rem;
@@ -12,12 +14,12 @@
   grid-template-columns: auto 1fr;
   grid-gap: 0.5rem; 
   align-items: center;
-}
 
-.message > img {
-  height: 1.5rem;
-}
+  & > img {
+    height: 1.5rem;
+  }
+`;
 
-.message--hidden {
+export const ErrorHidden = styled(ErrorShown)`
   visibility: hidden;
-}
+`;

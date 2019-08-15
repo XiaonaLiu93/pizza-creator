@@ -1,8 +1,8 @@
 import React from 'react';
-import './SubmitButton.css';
+import { Button } from './style';
 
 export default function SubmitButton({ onSubmitButtonClicked }) {
   return (
-    <button type="submit" onClick={() => onSubmitButtonClicked(true)}>Place Order</button>
+    <Button type="submit" onClick={() => onSubmitButtonClicked(true)}>Place Order</Button>
   );
 }

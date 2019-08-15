@@ -1,16 +1,5 @@
 import React from 'react';
-import './Topping.css';
-
-function setToppingClassName(name, chosenToppings) {
-  const activatedToppingClassName = `topping topping--active`;
-  const deactivatedToppingClassName = `topping`;
-
-  const isExisted = chosenToppings.find((chosenTopping) => chosenTopping.name === name);
-
-  const toppingClassName = isExisted ? activatedToppingClassName : deactivatedToppingClassName;
-
-  return toppingClassName;
-}
+import { ToppingActivated, ToppingDeactivated } from './style';
 
 function getChosenToppingAmount(name, chosenToppings) {
   const chosenTopping = chosenToppings.find((chosenTopping) => chosenTopping.name === name);
@@ -22,14 +11,16 @@ function getChosenToppingAmount(name, chosenToppings) {
 
 export default function Topping({ topping, chosenToppings, onAmountDecreased, onAmountIncreased }) {
   const { name, image } = topping;
+  const isExisted = chosenToppings.find((chosenTopping) => chosenTopping.name === name);
+  const ToppingDiv = isExisted ? ToppingActivated : ToppingDeactivated;
 
   return (
-    <div className={setToppingClassName(name, chosenToppings)}>
+    <ToppingDiv>
       <img src={image} alt={name}></img>
       <span>{name}</span>
       <button type="button" onClick={() => onAmountDecreased(topping)}>-</button>
-      <span className="topping__amount">{getChosenToppingAmount(name, chosenToppings)}</span>
+      <span>{getChosenToppingAmount(name, chosenToppings)}</span>
       <button type="button" onClick={() => onAmountIncreased(topping)}>+</button>
-    </div>
+    </ToppingDiv>
   );
 }

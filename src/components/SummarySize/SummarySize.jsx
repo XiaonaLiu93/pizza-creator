@@ -1,12 +1,12 @@
 import React from 'react';
-import './SummarySize.css';
+import { Item, ItemPrice } from './style';
 
 export default function SummarySize({ selectedSize }) {
   const { name, price } = selectedSize;
   return (
-    <li className="item">
+    <Item>
       <span>{name} Pizza</span>
-      <span className="item__price">{`$${price}`}</span>
-    </li>
+      <ItemPrice>{`$${price}`}</ItemPrice>
+    </Item>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from '../Title';
 import Size from '../Size';
-import './Sizes.css';
+import { SizesContainer } from './style';
 
 export default function Sizes({ selectedSize, onSizeSelected }) {
   const sizes = [
@@ -23,7 +23,7 @@ export default function Sizes({ selectedSize, onSizeSelected }) {
   return (
     <section>
       <Title>Select Your Pizza</Title>
-      <div className="sizes">
+      <SizesContainer>
         {
           sizes.map((size) => 
             <Size 
@@ -33,7 +33,7 @@ export default function Sizes({ selectedSize, onSizeSelected }) {
               onSizeSelected={onSizeSelected}
             />)
         }
-      </div>
+      </SizesContainer>
     </section>
   );
 }

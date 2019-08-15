@@ -13,7 +13,7 @@ import pepperImg from '../../assets/toppings/pepper.svg';
 import pepperoniImg from '../../assets/toppings/pepperoni.svg';
 import sweetcornImg from '../../assets/toppings/sweetcorn.svg';
 import tomatoImg from '../../assets/toppings/tomato.svg';
-import './Toppings.css';
+import { ToppingsContainer } from './style';
 
 export default function Toppings({ chosenToppings, onAmountDecreased, onAmountIncreased }) {
   const toppings = [
@@ -71,7 +71,7 @@ export default function Toppings({ chosenToppings, onAmountDecreased, onAmountIn
   return (
     <section>
       <Title>Choose Your Toppings</Title>
-      <div className="toppings">
+      <ToppingsContainer>
         {
           toppings.map((topping) => 
             <Topping 
@@ -82,7 +82,7 @@ export default function Toppings({ chosenToppings, onAmountDecreased, onAmountIn
               onAmountIncreased={onAmountIncreased}
             />)
         }
-      </div>
+      </ToppingsContainer>
     </section>
   );
 }

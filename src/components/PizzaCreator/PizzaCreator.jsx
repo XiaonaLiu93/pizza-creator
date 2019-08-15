@@ -5,7 +5,7 @@ import Sizes from '../Sizes';
 import Toppings from '../Toppings';
 import Summary from '../Summary';
 import Buttons from '../Buttons';
-import './PizzaCreator.css';
+import { PizzaCreatorContainer } from './style';
 
 export default class PizzaCreator extends React.Component {
   constructor(props) {
@@ -186,7 +186,7 @@ export default class PizzaCreator extends React.Component {
     const { details, selectedSize, chosenToppings, submitted } = this.state;
 
     return (
-      <div className="pizza-creator">
+      <PizzaCreatorContainer>
         <EmptyChosenToppingsError 
           submitted={submitted}
           chosenToppings={chosenToppings} 
@@ -215,7 +215,7 @@ export default class PizzaCreator extends React.Component {
           onSubmitButtonClicked={this.clickSubmitButton}
           onResetButtonClicked={this.clickResetButton}
         />
-      </div>
+      </PizzaCreatorContainer>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import toFixed from '../../helpers/toFixed';
-import './SummaryTotal.css';
+import { Total } from './style';
 
 export default function SummaryTotal({ selectedSize, chosenToppings }) {
   const { price: selectedSizePrice } = selectedSize;
@@ -12,6 +12,6 @@ export default function SummaryTotal({ selectedSize, chosenToppings }) {
   let total = parseFloat(selectedSizePrice) + parseFloat(chosenToppingsTotal);
 
   return (
-    <p className="total">Total: ${toFixed(total,2)}</p>
+    <Total>Total: ${toFixed(total,2)}</Total>
   );
 }

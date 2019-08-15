@@ -1,8 +1,8 @@
 import React from 'react';
-import './ResetButton.css';
+import { Button } from './style';
 
 export default function ResetButton({ onResetButtonClicked }) {
   return (
-    <button type="reset" onClick={onResetButtonClicked}>Reset Order</button>
+    <Button type="reset" onClick={onResetButtonClicked}>Reset Order</Button>
   );
 }

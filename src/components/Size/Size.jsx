@@ -1,26 +1,16 @@
 import React from 'react';
 import pizzaImg from '../../assets/size/pizza.png';
-import './Size.css';
-
-function setSizeClassName(name, selectedSize) {
-  const activatedSizeClassName = `sizes__${name} size size--active`;
-  const deactivatedSizeClassName = `sizes__${name} size`;
-
-  const sizeClassName = name === selectedSize.name ? activatedSizeClassName : deactivatedSizeClassName;
-
-  return sizeClassName;
-}
+import { SizeActivated, SizeDeactivated } from './style';
 
 export default function Size({ size, selectedSize, onSizeSelected }) {
   const { name, inch } = size;
+  const isEqual = name === selectedSize.name;
+  const SizeContainer = isEqual ? SizeActivated : SizeDeactivated;
   
   return (
-    <div 
-      className={setSizeClassName(name, selectedSize)}
-      onClick={() => onSizeSelected(size)}
-    >
+    <SizeContainer name={name} onClick={() => onSizeSelected(size)}>
       <img src={pizzaImg} alt={name}></img>
       <span>{`${name}(${inch}\")`}</span>
-    </div>
+    </SizeContainer>
   );
 }

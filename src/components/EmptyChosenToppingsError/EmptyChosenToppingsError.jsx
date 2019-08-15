@@ -1,25 +1,15 @@
 import React from 'react';
 import errorImg from '../../assets/error/error.png';
-import './EmptyChosenToppingsError.css';
-
-function setMessageClassName(submitted, chosenToppings) {
-  const showMessage = 'message';
-  const hideMessage = 'message message--hidden';
-
-  const isEmpty = !chosenToppings.length && submitted;
-
-  if (isEmpty) {
-    return showMessage;
-  }
-
-  return hideMessage;
-}
+import { ErrorShown, ErrorHidden} from './style';
 
 export default function EmptyChosenToppingsError({ submitted, chosenToppings }) {
+  const isEmpty = !chosenToppings.length && submitted;
+  const EmptyChosenToppingsErrorSection = isEmpty ? ErrorShown : ErrorHidden;
+
   return (
-    <section className={setMessageClassName(submitted, chosenToppings)}>
+    <EmptyChosenToppingsErrorSection chosenToppings={chosenToppings}>
       <img src={errorImg}></img>
       <span>Please choose at least one topping to place order!</span>
-    </section>
+    </EmptyChosenToppingsErrorSection>
   );
 }

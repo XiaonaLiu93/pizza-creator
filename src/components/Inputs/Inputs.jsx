@@ -1,7 +1,7 @@
 import React from 'react';
 import Title from '../Title';
 import Input from '../Input';
-import './inputs.css';
+import { InputsForm } from './style';
 
 export default function Inputs({ details, submitted, onInputChanged }) {
   const inputs = [
@@ -29,7 +29,7 @@ export default function Inputs({ details, submitted, onInputChanged }) {
   return (
     <section>
       <Title>Enter Your Details</Title>
-      <form className="inputs">
+      <InputsForm>
         {
           inputs.map((input) =>
             <Input 
@@ -40,7 +40,7 @@ export default function Inputs({ details, submitted, onInputChanged }) {
               onInputChanged={onInputChanged} 
             />)
         }
-      </form>
+      </InputsForm>
     </section>
   );
 }
