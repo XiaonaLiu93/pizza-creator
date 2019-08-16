@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Title from '../Title';
 import Topping from '../Topping';
 import anchovyImg from '../../assets/toppings/anchovy.svg';
@@ -13,59 +14,60 @@ import pepperImg from '../../assets/toppings/pepper.svg';
 import pepperoniImg from '../../assets/toppings/pepperoni.svg';
 import sweetcornImg from '../../assets/toppings/sweetcorn.svg';
 import tomatoImg from '../../assets/toppings/tomato.svg';
-import { ToppingsContainer } from './style';
+import ToppingsContainer from './style';
+import ChosenToppingPropTypes from '../../propTypes/ChosenTopping';
 
 export default function Toppings({ chosenToppings, onAmountDecreased, onAmountIncreased }) {
   const toppings = [
     {
       name: 'anchovy',
-      price: '0.69',
-      image: anchovyImg, 
+      price: 0.69,
+      image: anchovyImg,
     }, {
       name: 'bacon',
-      price: '0.69',
+      price: 0.69,
       image: baconImg,
     }, {
       name: 'basil',
-      price: '0.69',
+      price: 0.69,
       image: basilImg,
     }, {
       name: 'chili',
-      price: '0.69',
+      price: 0.69,
       image: chiliImg,
     }, {
       name: 'mozzarella',
-      price: '0.69',
+      price: 0.69,
       image: mozzarellaImg,
     }, {
       name: 'mushroom',
-      price: '0.69',
+      price: 0.69,
       image: mushroomImg,
     }, {
       name: 'olive',
-      price: '0.69',
+      price: 0.69,
       image: oliveImg,
     }, {
       name: 'onion',
-      price: '0.69',
+      price: 0.69,
       image: onionImg,
     }, {
       name: 'pepper',
-      price: '0.69',
+      price: 0.69,
       image: pepperImg,
     }, {
       name: 'pepperoni',
-      price: '0.69',
+      price: 0.69,
       image: pepperoniImg,
     }, {
       name: 'sweetcorn',
-      price: '0.69',
+      price: 0.69,
       image: sweetcornImg,
     }, {
       name: 'tomato',
-      price: '0.69',
+      price: 0.69,
       image: tomatoImg,
-    }
+    },
   ];
 
   return (
@@ -73,16 +75,23 @@ export default function Toppings({ chosenToppings, onAmountDecreased, onAmountIn
       <Title>Choose Your Toppings</Title>
       <ToppingsContainer>
         {
-          toppings.map((topping) => 
-            <Topping 
-              key={topping.name} 
-              topping={topping} 
-              chosenToppings={chosenToppings} 
+          toppings.map((topping) => (
+            <Topping
+              key={topping.name}
+              topping={topping}
+              chosenToppings={chosenToppings}
               onAmountDecreased={onAmountDecreased}
               onAmountIncreased={onAmountIncreased}
-            />)
+            />
+          ))
         }
       </ToppingsContainer>
     </section>
   );
 }
+
+Toppings.propTypes = {
+  chosenToppings: PropTypes.arrayOf(PropTypes.shape(ChosenToppingPropTypes)).isRequired,
+  onAmountDecreased: PropTypes.func.isRequired,
+  onAmountIncreased: PropTypes.func.isRequired,
+};

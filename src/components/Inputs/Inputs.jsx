@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Title from '../Title';
 import Input from '../Input';
-import { InputsForm } from './style';
+import InputsForm from './style';
+import DetailsPropTypes from '../../propTypes/Details';
 
 export default function Inputs({ details, submitted, onInputChanged }) {
   const inputs = [
@@ -23,7 +25,7 @@ export default function Inputs({ details, submitted, onInputChanged }) {
     }, {
       name: 'contactNumber',
       label: 'contact number',
-    }
+    },
   ];
 
   return (
@@ -31,16 +33,23 @@ export default function Inputs({ details, submitted, onInputChanged }) {
       <Title>Enter Your Details</Title>
       <InputsForm>
         {
-          inputs.map((input) =>
-            <Input 
-              key={input.name} 
+          inputs.map((input) => (
+            <Input
+              key={input.name}
               input={input}
               details={details}
               submitted={submitted}
-              onInputChanged={onInputChanged} 
-            />)
+              onInputChanged={onInputChanged}
+            />
+          ))
         }
       </InputsForm>
     </section>
   );
 }
+
+Inputs.propTypes = {
+  details: PropTypes.shape(DetailsPropTypes).isRequired,
+  submitted: PropTypes.bool.isRequired,
+  onInputChanged: PropTypes.func.isRequired,
+};

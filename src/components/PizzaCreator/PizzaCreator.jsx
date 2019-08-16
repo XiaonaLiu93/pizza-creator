@@ -5,7 +5,7 @@ import Sizes from '../Sizes';
 import Toppings from '../Toppings';
 import Summary from '../Summary';
 import Buttons from '../Buttons';
-import { PizzaCreatorContainer } from './style';
+import PizzaCreatorContainer from './style';
 
 export default class PizzaCreator extends React.Component {
   constructor(props) {
@@ -41,15 +41,15 @@ export default class PizzaCreator extends React.Component {
 
       selectedSize: {
         name: 'large',
-        price: '13.99',
+        price: 13.99,
       },
-  
+
       chosenToppings: [],
 
       submitted: false,
     };
 
-    this.state = {...this.initialState};
+    this.state = { ...this.initialState };
 
     this.changeInput = this.changeInput.bind(this);
     this.selectSize = this.selectSize.bind(this);
@@ -59,9 +59,27 @@ export default class PizzaCreator extends React.Component {
     this.clickResetButton = this.clickResetButton.bind(this);
   }
 
+  setChosenToppings(newChosenToppings) {
+    this.setState({
+      chosenToppings: [...newChosenToppings],
+    });
+  }
+
+  setDetailSubmitted(newStatus) {
+    this.setState({
+      submitted: newStatus,
+    });
+  }
+
   setDetails(newDetails) {
     this.setState({
-      details: {...newDetails},
+      details: { ...newDetails },
+    });
+  }
+
+  setSelectedSize(newSelectedSize) {
+    this.setState({
+      selectedSize: newSelectedSize,
     });
   }
 
@@ -71,45 +89,38 @@ export default class PizzaCreator extends React.Component {
     const newDetails = {
       ...details,
       [name]: {
-        value: value,
+        value,
         showError: true,
-      }
+      },
     };
 
     this.setDetails(newDetails);
-  }
-
-  setSelectedSize(newSelectedSize) {
-    this.setState({
-      selectedSize: newSelectedSize,
-    });
   }
 
   selectSize(size) {
     const newSelectedSize = {
       name: size.name,
       price: size.price,
-    }
+    };
 
     this.setSelectedSize(newSelectedSize);
   }
 
-  setChosenToppings(newChosenToppings) {
-    this.setState({
-      chosenToppings: [...newChosenToppings],
-    });
+  clickSubmitButton(newStatus) {
+    this.setDetailSubmitted(newStatus);
   }
 
   updateChosenToppingAmount(topping, delta) {
     const { chosenToppings } = this.state;
-    
+
     const newChosenToppings = chosenToppings.map((chosenTopping) => {
       if (topping.name !== chosenTopping.name) {
         return chosenTopping;
       }
 
-      chosenTopping.amount += delta;
-      return chosenTopping;
+      const newChosenTopping = chosenTopping;
+      newChosenTopping.amount += delta;
+      return newChosenTopping;
     });
 
     this.setChosenToppings(newChosenToppings);
@@ -118,9 +129,7 @@ export default class PizzaCreator extends React.Component {
   removeFromChosenTopping(topping) {
     const { chosenToppings } = this.state;
 
-    const newChosenToppings = chosenToppings.filter(({ name }) => {
-      return name !== topping.name;
-    });
+    const newChosenToppings = chosenToppings.filter(({ name }) => name !== topping.name);
 
     this.setChosenToppings(newChosenToppings);
   }
@@ -150,7 +159,7 @@ export default class PizzaCreator extends React.Component {
         name: topping.name,
         price: topping.price,
         amount: delta,
-      }
+      },
     ];
 
     this.setChosenToppings(newChosenToppings);
@@ -168,50 +177,42 @@ export default class PizzaCreator extends React.Component {
     this.updateChosenToppingAmount(topping, delta);
   }
 
-  setDetailSubmitted(newStatus) {
-    this.setState({
-      submitted: newStatus,
-    });
-  }
-
-  clickSubmitButton(newStatus) {
-    this.setDetailSubmitted(newStatus);
-  }
-
   clickResetButton() {
     this.setState(this.initialState);
   }
 
   render() {
-    const { details, selectedSize, chosenToppings, submitted } = this.state;
+    const {
+      details, selectedSize, chosenToppings, submitted,
+    } = this.state;
 
     return (
       <PizzaCreatorContainer>
-        <EmptyChosenToppingsError 
+        <EmptyChosenToppingsError
           submitted={submitted}
-          chosenToppings={chosenToppings} 
+          chosenToppings={chosenToppings}
         />
-        <Inputs 
+        <Inputs
           details={details}
           submitted={submitted}
           onInputChanged={this.changeInput}
         />
-        <Sizes 
-          selectedSize={selectedSize} 
-          onSizeSelected={this.selectSize} 
+        <Sizes
+          selectedSize={selectedSize}
+          onSizeSelected={this.selectSize}
         />
-        <Toppings 
-          chosenToppings={chosenToppings} 
+        <Toppings
+          chosenToppings={chosenToppings}
           onAmountDecreased={this.decreaseChosenToppingAmount}
           onAmountIncreased={this.increaseChosenToppingAmount}
         />
-        <Summary 
-          selectedSize={selectedSize} 
-          chosenToppings={chosenToppings} 
+        <Summary
+          selectedSize={selectedSize}
+          chosenToppings={chosenToppings}
           onAmountDecreased={this.decreaseChosenToppingAmount}
           onAmountIncreased={this.increaseChosenToppingAmount}
         />
-        <Buttons 
+        <Buttons
           onSubmitButtonClicked={this.clickSubmitButton}
           onResetButtonClicked={this.clickResetButton}
         />

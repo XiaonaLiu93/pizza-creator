@@ -19,26 +19,26 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-         'style-loader',
-         'css-loader'
-        ]
+          'style-loader',
+          'css-loader',
+        ],
       }, {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
-          'file-loader'
-        ]
+          'file-loader',
+        ],
       }, {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
+          loader: 'babel-loader',
+        },
+      },
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ 
-      template: `${SRC_DIR}/index.html`
-    })
-  ]
-}
+    new HtmlWebpackPlugin({
+      template: `${SRC_DIR}/index.html`,
+    }),
+  ],
+};
