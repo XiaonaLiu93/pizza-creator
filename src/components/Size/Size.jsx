@@ -10,9 +10,9 @@ export default function Size({ size, selectedSize, onSizeSelected }) {
   const SizeContainer = isEqual ? SizeActivated : SizeDeactivated;
 
   return (
-    <SizeContainer name={name} onClick={() => onSizeSelected(size)}>
-      <img src={pizzaImg} alt={name} />
-      <span>{`${name}(${inch}")`}</span>
+    <SizeContainer data-testid="size" name={name} onClick={() => onSizeSelected(size)}>
+      <img data-testid="size__image" src={pizzaImg} alt={name} />
+      <span data-testid="size__details">{`${name}(${inch}")`}</span>
     </SizeContainer>
   );
 }

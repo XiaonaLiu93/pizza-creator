@@ -19,12 +19,12 @@ export default function Topping({
   const ToppingDiv = isExisted ? ToppingActivated : ToppingDeactivated;
 
   return (
-    <ToppingDiv>
-      <img src={image} alt={name} />
-      <span>{name}</span>
-      <button type="button" onClick={() => onAmountDecreased(topping)}>-</button>
-      <span>{getChosenToppingAmount(name, chosenToppings)}</span>
-      <button type="button" onClick={() => onAmountIncreased(topping)}>+</button>
+    <ToppingDiv data-testid="topping">
+      <img data-testid="topping__img" src={image} alt={name} />
+      <span data-testid="topping__name">{name}</span>
+      <button data-testid="amount__decrease" type="button" onClick={() => onAmountDecreased(topping)}>-</button>
+      <span data-testid="topping__amount">{getChosenToppingAmount(name, chosenToppings)}</span>
+      <button data-testid="amount__increase" type="button" onClick={() => onAmountIncreased(topping)}>+</button>
     </ToppingDiv>
   );
 }

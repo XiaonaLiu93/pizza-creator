@@ -4,7 +4,7 @@ import Button from './style';
 
 export default function ResetButton({ onResetButtonClicked }) {
   return (
-    <Button type="reset" onClick={onResetButtonClicked}>Reset Order</Button>
+    <Button data-testid="button" type="reset" onClick={onResetButtonClicked}>Reset Order</Button>
   );
 }
 

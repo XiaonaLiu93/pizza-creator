@@ -7,8 +7,8 @@ export default function SummarySize({ selectedSize }) {
   const { name, price } = selectedSize;
   return (
     <Item>
-      <span>{`${name} Pizza`}</span>
-      <ItemPrice>{`$${price}`}</ItemPrice>
+      <span data-testid="size__name">{`${name} Pizza`}</span>
+      <ItemPrice data-testid="size__price">{`$${price}`}</ItemPrice>
     </Item>
   );
 }

@@ -4,7 +4,7 @@ import TitleName from './style';
 
 export default function Title({ children }) {
   return (
-    <TitleName>{children}</TitleName>
+    <TitleName data-testid="title">{children}</TitleName>
   );
 }
 

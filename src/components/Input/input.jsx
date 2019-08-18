@@ -13,10 +13,10 @@ export default function Input({
   const InputDiv = isError ? InputError : InputNoError;
 
   return (
-    <InputDiv>
-      <label htmlFor={name}>{label}</label>
-      <span>{`Please enter your ${label}`}</span>
-      <input type="text" name={name} id={name} onChange={({ target: { value: newValue } }) => onInputChanged(name, newValue)} />
+    <InputDiv data-testid="input">
+      <label data-testid="input__label" htmlFor={name}>{label}</label>
+      <span data-testid="input__error">{`Please enter your ${label}`}</span>
+      <input data-testid="input__box" type="text" name={name} id={name} onChange={({ target: { value: newValue } }) => onInputChanged(name, newValue)} />
     </InputDiv>
   );
 }

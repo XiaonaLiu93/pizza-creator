@@ -8,12 +8,12 @@ export default function SummaryTopping({ chosenTopping, onAmountDecreased, onAmo
   const { name, price, amount } = chosenTopping;
 
   return (
-    <Item>
-      <span>{name}</span>
-      <button type="button" onClick={() => onAmountDecreased(chosenTopping)}>-</button>
-      <ItemAmount>{amount}</ItemAmount>
-      <button type="button" onClick={() => onAmountIncreased(chosenTopping)}>+</button>
-      <ItemPrice>{`$${toFixed(price * amount, 2)}`}</ItemPrice>
+    <Item data-testid="item">
+      <span data-testid="item__name">{name}</span>
+      <button data-testid="item__decrease" type="button" onClick={() => onAmountDecreased(chosenTopping)}>-</button>
+      <ItemAmount data-testid="item__amount">{amount}</ItemAmount>
+      <button data-testid="item__increase" type="button" onClick={() => onAmountIncreased(chosenTopping)}>+</button>
+      <ItemPrice data-testid="item__subtotal">{`$${toFixed(price * amount, 2)}`}</ItemPrice>
     </Item>
   );
 }

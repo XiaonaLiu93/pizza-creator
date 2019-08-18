@@ -9,9 +9,9 @@ export default function EmptyChosenToppingsError({ submitted, chosenToppings }) 
   const EmptyChosenToppingsErrorSection = isEmpty ? ErrorShown : ErrorHidden;
 
   return (
-    <EmptyChosenToppingsErrorSection chosenToppings={chosenToppings}>
-      <img src={errorImg} alt="error" />
-      <span>Please choose at least one topping to place order!</span>
+    <EmptyChosenToppingsErrorSection data-testid="error">
+      <img data-testid="error__image" src={errorImg} alt="error" />
+      <span data-testid="error__message">Please choose at least one topping to place order!</span>
     </EmptyChosenToppingsErrorSection>
   );
 }

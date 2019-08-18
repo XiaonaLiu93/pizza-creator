@@ -16,7 +16,7 @@ export default function SummaryTotal({ selectedSize, chosenToppings }) {
   const total = parseFloat(selectedSizePrice) + parseFloat(chosenToppingsTotal);
 
   return (
-    <Total>{`Total: $${toFixed(total, 2)}`}</Total>
+    <Total data-testid="total">{`Total: $${toFixed(total, 2)}`}</Total>
   );
 }
 

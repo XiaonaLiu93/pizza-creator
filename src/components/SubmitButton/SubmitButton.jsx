@@ -4,7 +4,7 @@ import Button from './style';
 
 export default function SubmitButton({ onSubmitButtonClicked }) {
   return (
-    <Button type="submit" onClick={() => onSubmitButtonClicked(true)}>Place Order</Button>
+    <Button data-testid="button" type="submit" onClick={() => onSubmitButtonClicked(true)}>Place Order</Button>
   );
 }
 

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const InputNoError = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
+  color: rgba(0,0,0,0.6);
 
   & > label {
     font-size: 12px;
     font-weight: bold;
-    color: rgba(0,0,0,0.6);
     display: block;
     margin-bottom: 10px;
     text-transform: uppercase;
@@ -36,6 +36,7 @@ export const InputNoError = styled.div`
 `;
 
 export const InputError = styled(InputNoError)`
+  color: rgba(255, 0, 0, 1);
 
   & > label {
     color: rgba(255,0,0,1);
@@ -44,7 +45,6 @@ export const InputError = styled(InputNoError)`
   & > span {
     visibility: visible;
     font-size: 14px;
-    color: rgba(255, 0, 0, 1);
     display: block;
     margin-bottom: 8px;
   }
